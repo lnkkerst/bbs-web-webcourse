@@ -11,6 +11,7 @@ const favorite = defineProps({
         }])
     }
 })
+
 const trans = {
     NODE: "节点",
     POST: "帖子",
@@ -19,7 +20,7 @@ const trans = {
 </script>
 
 <template>
-    <el-collapse-item>
+    <el-collapse-item :name=favorite.type>
         <template #title>
             {{trans[favorite.type]}}
             <el-tag type="success" style="float: right">

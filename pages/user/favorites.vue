@@ -2,7 +2,9 @@
 const api = 'https://web-blog.api.lnkkerst.me/api';
 const favorites = ref();
 const loading = ref(true)
+const route = useRoute()
 onMounted(()=>{
+    route.query.item
     $fetch('/favorites', {
         baseURL: api,
         server: false,
@@ -22,7 +24,7 @@ onMounted(()=>{
 
 <template>
     <div v-loading="loading" style="min-width: 600px; min-height: 450px">
-        <card v-for="favorite in favorites" v-bind="favorite"/>
+        <favoritecard v-for="favorite in favorites" v-bind="favorite"/>
     </div>
 </template>
 

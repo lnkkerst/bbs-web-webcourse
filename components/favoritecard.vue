@@ -31,10 +31,16 @@ const favorite = defineProps({
     }
 )
 
+const open = defineProps({
+    name: String
+})
+
+const open_ = ref(open)
+
 const timeAt = ref()
 onMounted(()=>{
     try {
-        timeAt.value = new Date(favorite.createdAt.slice(0, -1)).toLocaleDateString(undefined, {
+        timeAt.value = new Date((favorite.createdAt || "").slice(0, -1)).toLocaleDateString(undefined, {
             month: 'long',
             day: 'numeric',
         })
@@ -46,7 +52,8 @@ onMounted(()=>{
 </script>
 
 <template>
-    <el-collapse accordion>
+    <el-collapse v-model="open_" accordion >
+        <favoriteitem/>
     </el-collapse>
 </template>
 

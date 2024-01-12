@@ -29,7 +29,7 @@ const comment = defineProps({
 const timeAt = ref()
 onMounted(()=>{
     try {
-        timeAt.value = new Date(comment.createdAt.slice(0, -1)).toLocaleDateString(undefined, {
+        timeAt.value = new Date((comment.createdAt || "").slice(0, -1)).toLocaleDateString(undefined, {
             month: 'long',
             day: 'numeric',
         })

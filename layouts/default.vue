@@ -1,28 +1,5 @@
 <script lang="ts" setup>
-const api = 'https://web-blog.api.lnkkerst.me/api';
-const num = ref({
-    NODE: 0,
-    POSTER: 0,
-    POST: 0
-});
-const loading = ref(true)
-onMounted(()=>{
-    $fetch('/favorites/count', {
-        baseURL: api,
-        server: false,
-        method: "GET",
-        retry: 3,
-        retryDelay: 500,
-        timeout: 3000,
-        query:{
-            "posterId.equals": 1,
-            "type.in": "NODE"
-        }
-    }).then((res)=>{
-        num.value.NODE = res
-        loading.value = false
-    }).catch((err)=>{console.log(err.data)})
-})
+
 </script>
 
 <template>
