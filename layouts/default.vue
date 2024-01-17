@@ -1,9 +1,11 @@
 <template>
   <div>
-    <q-layout>
+    <q-layout view="hHh lpR fff">
       <q-header elevated class="bg-primary text-white">
         <q-toolbar>
-          <q-toolbar-title>Blog</q-toolbar-title>
+          <q-toolbar-title>
+            <NuxtLink to="/">Blog</NuxtLink>
+          </q-toolbar-title>
         </q-toolbar>
       </q-header>
 

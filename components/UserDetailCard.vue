@@ -1,32 +1,32 @@
 <script setup lang="ts">
 const userStore = useUserStore();
 
-const { data: nodesFavCount } = useBlogFetch("/api/favorites/count", {
+const { data: nodesFavCount } = await useBlogFetch("/api/favorites/count", {
   query: {
     "type.equals": "NODE",
   },
 });
-const { data: usersFavCount } = useBlogFetch("/api/favorites/count", {
+const { data: usersFavCount } = await useBlogFetch("/api/favorites/count", {
   query: {
     "type.equals": "USER",
   },
 });
-const { data: postsFavCount } = useBlogFetch("/api/favorites/count", {
+const { data: postsFavCount } = await useBlogFetch("/api/favorites/count", {
   query: {
     "type.equals": "POST",
   },
 });
-const { data: postsCount } = useBlogFetch("/api/posts/count", {
+const { data: postsCount } = await useBlogFetch("/api/posts/count", {
   query: {
     "userId.equals": userStore.user?.id,
   },
 });
-const { data: commentsCount } = useBlogFetch("/api/comments/count", {
+const { data: commentsCount } = await useBlogFetch("/api/comments/count", {
   query: {
     "userId.equals": userStore.user?.id,
   },
 });
-const { data: fansCount } = useBlogFetch("/api/favorites/count", {
+const { data: fansCount } = await useBlogFetch("/api/favorites/count", {
   query: {
     "type.equals": "USER",
     "userId.equals": userStore.user?.id,
@@ -66,9 +66,7 @@ const items = ref([
       <q-card-section horizontal>
         <q-card-section>
           <q-avatar size="72px">
-            <q-img
-              :src="userStore.user?.imageUrl ?? 'https://http.cat/503'"
-            ></q-img>
+            <q-img :src="userStore.user?.imageUrl || defaultAvatar"></q-img>
           </q-avatar>
         </q-card-section>
 
