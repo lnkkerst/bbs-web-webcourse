@@ -1,40 +1,15 @@
-<script lang="ts" setup>
-
-</script>
-
 <template>
-    <el-container class="layout">
-        <el-header class="header">
-            <top/>
-        </el-header>
-        <el-container class="bg-color">
-            <el-main style="width: 690px; min-height: 400px">
-                <slot/>
-            </el-main>
-            <el-aside>
-                <usercard/>
-            </el-aside>
-        </el-container>
-    </el-container>
+  <div>
+    <q-layout>
+      <q-header elevated class="bg-primary text-white">
+        <q-toolbar>
+          <q-toolbar-title>Blog</q-toolbar-title>
+        </q-toolbar>
+      </q-header>
+
+      <q-page-container>
+        <slot />
+      </q-page-container>
+    </q-layout>
+  </div>
 </template>
-
-<style>
-
-.layout {
-    align-items: center;
-    background-color: #E5EAF3
-}
-
-.header{
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    box-shadow: 0 3px 20px #636466;
-    padding: 0;
-}
-
-.bg-color{
-    margin-top: 30px;
-}
-
-</style>

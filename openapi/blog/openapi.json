@@ -1,0 +1,3567 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Blogapi API",
+    "description": "Blogapi API documentation",
+    "termsOfService": "",
+    "contact": { "name": "", "url": "", "email": "" },
+    "license": { "name": "unlicensed", "url": "" },
+    "version": "0.0.1"
+  },
+  "servers": [
+    { "url": "http://localhost:9000", "description": "Generated server url" }
+  ],
+  "paths": {
+    "/api/posts/{id}": {
+      "get": {
+        "tags": ["post-resource"],
+        "operationId": "getPost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PostDTO" } }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["post-resource"],
+        "operationId": "updatePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PostDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PostDTO" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["post-resource"],
+        "operationId": "deletePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "patch": {
+        "tags": ["post-resource"],
+        "operationId": "partialUpdatePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PostDTO" }
+            },
+            "application/merge-patch+json": {
+              "schema": { "$ref": "#/components/schemas/PostDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PostDTO" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/nodes/{id}": {
+      "get": {
+        "tags": ["node-resource"],
+        "operationId": "getNode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/NodeDTO" } }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["node-resource"],
+        "operationId": "updateNode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NodeDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/NodeDTO" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["node-resource"],
+        "operationId": "deleteNode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "patch": {
+        "tags": ["node-resource"],
+        "operationId": "partialUpdateNode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NodeDTO" }
+            },
+            "application/merge-patch+json": {
+              "schema": { "$ref": "#/components/schemas/NodeDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/NodeDTO" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorites/{id}": {
+      "get": {
+        "tags": ["favorite-resource"],
+        "operationId": "getFavorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["favorite-resource"],
+        "operationId": "updateFavorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["favorite-resource"],
+        "operationId": "deleteFavorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "patch": {
+        "tags": ["favorite-resource"],
+        "operationId": "partialUpdateFavorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+            },
+            "application/merge-patch+json": {
+              "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comments/{id}": {
+      "get": {
+        "tags": ["comment-resource"],
+        "operationId": "getComment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/CommentDTO" } }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["comment-resource"],
+        "operationId": "updateComment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CommentDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/CommentDTO" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["comment-resource"],
+        "operationId": "deleteComment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "patch": {
+        "tags": ["comment-resource"],
+        "operationId": "partialUpdateComment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CommentDTO" }
+            },
+            "application/merge-patch+json": {
+              "schema": { "$ref": "#/components/schemas/CommentDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/CommentDTO" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "tags": ["user-resource"],
+        "operationId": "getAllUsers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": { "minimum": 0, "type": "integer", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": { "minimum": 1, "type": "integer", "default": 20 }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AdminUserDTO" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["user-resource"],
+        "operationId": "updateUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AdminUserDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AdminUserDTO" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["user-resource"],
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AdminUserDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/User" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/register": {
+      "post": {
+        "tags": ["account-resource"],
+        "operationId": "registerAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ManagedUserVM" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/posts": {
+      "get": {
+        "tags": ["post-resource"],
+        "operationId": "getAllPosts",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "title.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "title.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "title.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "content.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "content.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "content.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "createdAt.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "createdAt.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "createdAt.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "userId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "userId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "nodeId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": { "minimum": 0, "type": "integer", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": { "minimum": 1, "type": "integer", "default": 20 }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/PostDTO" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["post-resource"],
+        "operationId": "createPost",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PostDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PostDTO" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/nodes": {
+      "get": {
+        "tags": ["node-resource"],
+        "operationId": "getAllNodes",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "name.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "name.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "name.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": { "minimum": 0, "type": "integer", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": { "minimum": 1, "type": "integer", "default": 20 }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/NodeDTO" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["node-resource"],
+        "operationId": "createNode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NodeDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/NodeDTO" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorites": {
+      "get": {
+        "tags": ["favorite-resource"],
+        "operationId": "getAllFavorites",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "type.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+          },
+          {
+            "name": "type.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+          },
+          {
+            "name": "type.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "type.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+            }
+          },
+          {
+            "name": "type.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+            }
+          },
+          {
+            "name": "ownerId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "ownerId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "ownerId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "userId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "nodeId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "postId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": { "minimum": 0, "type": "integer", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": { "minimum": 1, "type": "integer", "default": 20 }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/FavoriteDTO" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["favorite-resource"],
+        "operationId": "createFavorite",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/FavoriteDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comments": {
+      "get": {
+        "tags": ["comment-resource"],
+        "operationId": "getAllComments",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "content.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "content.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "content.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "createdAt.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "createdAt.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "createdAt.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "replyId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "replyId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "replyId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "postId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "userId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "commentId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "commentId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "commentId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": { "minimum": 0, "type": "integer", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": { "minimum": 1, "type": "integer", "default": 20 }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/CommentDTO" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["comment-resource"],
+        "operationId": "createComment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CommentDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/CommentDTO" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/authenticate": {
+      "get": {
+        "tags": ["authenticate-controller"],
+        "operationId": "isAuthenticated",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      },
+      "post": {
+        "tags": ["authenticate-controller"],
+        "operationId": "authorize",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginVM" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/JWTToken" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/account": {
+      "get": {
+        "tags": ["account-resource"],
+        "operationId": "getAccount",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AdminUserDTO" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["account-resource"],
+        "operationId": "saveAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AdminUserDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/account/reset-password/init": {
+      "post": {
+        "tags": ["account-resource"],
+        "operationId": "requestPasswordReset",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "type": "string" } } },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/account/reset-password/finish": {
+      "post": {
+        "tags": ["account-resource"],
+        "operationId": "finishPasswordReset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KeyAndPasswordVM" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/account/change-password": {
+      "post": {
+        "tags": ["account-resource"],
+        "operationId": "changePassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PasswordChangeDTO" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": ["public-user-resource"],
+        "operationId": "getAllPublicUsers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": { "minimum": 0, "type": "integer", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": { "minimum": 1, "type": "integer", "default": 20 }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/UserDTO" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/count": {
+      "get": {
+        "tags": ["post-resource"],
+        "operationId": "countPosts",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "title.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "title.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "title.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "title.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "content.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "content.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "content.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "createdAt.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "createdAt.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "createdAt.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "userId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "userId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "nodeId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "type": "integer", "format": "int64" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/nodes/count": {
+      "get": {
+        "tags": ["node-resource"],
+        "operationId": "countNodes",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "name.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "name.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "name.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "name.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "type": "integer", "format": "int64" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/favorites/count": {
+      "get": {
+        "tags": ["favorite-resource"],
+        "operationId": "countFavorites",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "type.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+          },
+          {
+            "name": "type.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+          },
+          {
+            "name": "type.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "type.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+            }
+          },
+          {
+            "name": "type.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["NODE", "USER", "POST"] }
+            }
+          },
+          {
+            "name": "ownerId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "ownerId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "ownerId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "ownerId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "userId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "nodeId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "nodeId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "nodeId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "postId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "type": "integer", "format": "int64" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/comments/count": {
+      "get": {
+        "tags": ["comment-resource"],
+        "operationId": "countComments",
+        "parameters": [
+          {
+            "name": "id.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "id.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "id.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "id.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "content.contains",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.doesNotContain",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "content.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "content.in",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "content.notIn",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "array", "items": { "type": "string" } }
+          },
+          {
+            "name": "createdAt.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date-time" }
+          },
+          {
+            "name": "createdAt.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "createdAt.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "createdAt.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string", "format": "date-time" }
+            }
+          },
+          {
+            "name": "replyId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "replyId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "replyId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "replyId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "postId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "postId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "postId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "userId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "userId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "commentId.greaterThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.lessThan",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.greaterThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.lessThanOrEqual",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.equals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.notEquals",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "commentId.specified",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          },
+          {
+            "name": "commentId.in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "commentId.notIn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          },
+          {
+            "name": "distinct",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "type": "integer", "format": "int64" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/authorities": {
+      "get": {
+        "tags": ["public-user-resource"],
+        "operationId": "getAuthorities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users/{login}": {
+      "get": {
+        "tags": ["user-resource"],
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AdminUserDTO" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["user-resource"],
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/activate": {
+      "get": {
+        "tags": ["account-resource"],
+        "operationId": "activateAccount",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NodeDTO": {
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "name": { "type": "string" }
+        }
+      },
+      "PostDTO": {
+        "required": ["content", "createdAt", "title"],
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "user": { "$ref": "#/components/schemas/UserDTO" },
+          "node": { "$ref": "#/components/schemas/NodeDTO" }
+        }
+      },
+      "UserDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "login": { "type": "string" }
+        }
+      },
+      "FavoriteDTO": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "type": { "type": "string", "enum": ["NODE", "USER", "POST"] },
+          "owner": { "$ref": "#/components/schemas/UserDTO" },
+          "user": { "$ref": "#/components/schemas/UserDTO" },
+          "node": { "$ref": "#/components/schemas/NodeDTO" },
+          "post": { "$ref": "#/components/schemas/PostDTO" }
+        }
+      },
+      "CommentDTO": {
+        "required": ["content", "createdAt"],
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "content": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "reply": { "$ref": "#/components/schemas/CommentDTO" },
+          "post": { "$ref": "#/components/schemas/PostDTO" },
+          "user": { "$ref": "#/components/schemas/UserDTO" }
+        }
+      },
+      "AdminUserDTO": {
+        "required": ["login"],
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "login": {
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$",
+            "type": "string"
+          },
+          "firstName": { "maxLength": 50, "minLength": 0, "type": "string" },
+          "lastName": { "maxLength": 50, "minLength": 0, "type": "string" },
+          "email": { "maxLength": 254, "minLength": 5, "type": "string" },
+          "imageUrl": { "maxLength": 256, "minLength": 0, "type": "string" },
+          "activated": { "type": "boolean" },
+          "langKey": { "maxLength": 10, "minLength": 2, "type": "string" },
+          "createdBy": { "type": "string" },
+          "createdDate": { "type": "string", "format": "date-time" },
+          "lastModifiedBy": { "type": "string" },
+          "lastModifiedDate": { "type": "string", "format": "date-time" },
+          "authorities": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "ManagedUserVM": {
+        "required": ["login"],
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "login": {
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$",
+            "type": "string"
+          },
+          "firstName": { "maxLength": 50, "minLength": 0, "type": "string" },
+          "lastName": { "maxLength": 50, "minLength": 0, "type": "string" },
+          "email": { "maxLength": 254, "minLength": 5, "type": "string" },
+          "imageUrl": { "maxLength": 256, "minLength": 0, "type": "string" },
+          "activated": { "type": "boolean" },
+          "langKey": { "maxLength": 10, "minLength": 2, "type": "string" },
+          "createdBy": { "type": "string" },
+          "createdDate": { "type": "string", "format": "date-time" },
+          "lastModifiedBy": { "type": "string" },
+          "lastModifiedDate": { "type": "string", "format": "date-time" },
+          "authorities": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "password": { "maxLength": 100, "minLength": 4, "type": "string" }
+        }
+      },
+      "LoginVM": {
+        "required": ["password", "username"],
+        "type": "object",
+        "properties": {
+          "username": { "maxLength": 50, "minLength": 1, "type": "string" },
+          "password": { "maxLength": 100, "minLength": 4, "type": "string" },
+          "rememberMe": { "type": "boolean" }
+        }
+      },
+      "JWTToken": {
+        "type": "object",
+        "properties": { "id_token": { "type": "string" } }
+      },
+      "User": {
+        "required": ["activated", "login"],
+        "type": "object",
+        "properties": {
+          "createdBy": { "type": "string" },
+          "createdDate": { "type": "string", "format": "date-time" },
+          "lastModifiedBy": { "type": "string" },
+          "lastModifiedDate": { "type": "string", "format": "date-time" },
+          "id": { "type": "integer", "format": "int64" },
+          "login": {
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$",
+            "type": "string"
+          },
+          "firstName": { "maxLength": 50, "minLength": 0, "type": "string" },
+          "lastName": { "maxLength": 50, "minLength": 0, "type": "string" },
+          "email": { "maxLength": 254, "minLength": 5, "type": "string" },
+          "activated": { "type": "boolean" },
+          "langKey": { "maxLength": 10, "minLength": 2, "type": "string" },
+          "imageUrl": { "maxLength": 256, "minLength": 0, "type": "string" },
+          "resetDate": { "type": "string", "format": "date-time" }
+        }
+      },
+      "KeyAndPasswordVM": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "string" },
+          "newPassword": { "type": "string" }
+        }
+      },
+      "PasswordChangeDTO": {
+        "type": "object",
+        "properties": {
+          "currentPassword": { "type": "string" },
+          "newPassword": { "type": "string" }
+        }
+      }
+    }
+  }
+}

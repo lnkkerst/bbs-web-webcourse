@@ -1,14 +1,35 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    devtools: {enabled: true},
-    modules: ['@element-plus/nuxt'],
-    app: {
-        head: {
-            meta: [
-                // <meta name="viewport" content="width=device-width, initial-scale=1">
-                {name: 'viewport', content: 'width=device-width, initial-scale=1', charset: 'utf-8'}
-            ],
-            title: 'V2EX'
-        }
-    }
-})
+  devtools: { enabled: true },
+  css: ["./assets/styles/global.scss"],
+  modules: [
+    "@vueuse/nuxt",
+    "nuxt-open-fetch",
+    "nuxt-lodash",
+    "@unocss/nuxt",
+    "nuxt-icon",
+    "nuxt-quasar-ui",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@formkit/auto-animate",
+  ],
+  runtimeConfig: {
+    public: {
+      blogApiBase: process.env["NUXT_BLOGAPI_BASE"],
+    },
+  },
+  openFetch: {
+    disablePlugin: true,
+    clients: {
+      blog: {
+        baseURL: process.env["NUXT_BLOGAPI_BASE"],
+      },
+    },
+  },
+  quasar: {
+    iconSet: "mdi-v7",
+    plugins: ["Notify", "Loading", "Dialog"],
+    lang: "zh-CN",
+    sassVariables: "./assets/styles/quasar.variables.scss",
+  },
+});

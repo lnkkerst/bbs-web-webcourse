@@ -1,65 +1,55 @@
-<script setup lang="ts">
-const api = 'https://web-blog.api.lnkkerst.me/api'
-const nodes = ref()
-const posts = ref();
-const loading = ref(true);
-const nodeFetch = (id: number | null) => {
-    $fetch('/posts', {
-        baseURL: api,
-        server: false,
-        method: "GET",
-        retry: 3,
-        retryDelay: 500,
-        timeout: 3000,
-        query: {
-            page: 0,
-            size: 10,
-            "nodeId.equals": id
-        }
-    }).then((res) => {
-        posts.value = res
-        loading.value = false
-    }).catch((err) => {
-        console.log(err.data)
-    })
-}
-onMounted(()=>{
-    $fetch('/nodes', {
-        baseURL: api,
-        server: false,
-        method: "GET",
-        retry: 3,
-        retryDelay: 500,
-        timeout: 3000,
-    }).then((res)=>{
-        nodeFetch(null)
-        nodes.value=res
-    }).catch((err)=>{console.log(err.data)})
-})
+<script lang="ts" setup>
+import { type Node } from "~/types/blogApi";
 
+const nodesFetch = await useBlogFetch("/api/nodes");
+const nodes = computed(() => {
+  const res: Array<Node> = [{ id: -1, name: "全部" }];
+  if (nodesFetch.data.value) {
+    console.log(nodesFetch.data.value);
+    res.push(...nodesFetch.data.value);
+  }
+  return res;
+});
+const currentNode = ref<number | undefined>(-1);
+const page = ref(1);
+const size = ref(20);
+const postsFetch = await useBlogFetch("/api/posts", {
+  query: computed(() => ({
+    "nodeId.equals": currentNode.value === -1 ? undefined : currentNode.value,
+  })),
+});
 </script>
 
 <template>
-    <el-row>
-        <el-check-tag
-            v-for="node in nodes"
-            :type="''"
-            size="large"
-            style="margin: 0 0 5px 20px; font-size: medium; font-weight: 300;"
-
-        >
-            <nuxt-link style="color: #66b1ff; text-decoration: none" @click="()=>{
-                nodeFetch(node.id)
-            }">
+  <q-page>
+    <div
+      class="mx-auto pt-6 w-96/100 max-w-256 grid grid-rows-2 md:grid-cols-[1fr_288px] gap-2"
+    >
+      <div class="">
+        <q-card>
+          <div class="flex items-center p-2">
+            <template v-for="node in nodes">
+              <q-chip
+                :color="currentNode === node.id ? 'primary' : undefined"
+                :text-color="currentNode === node.id ? 'white' : undefined"
+                clickable
+                @click="currentNode = node.id"
+              >
                 {{ node.name }}
-            </nuxt-link>
-        </el-check-tag>
-    </el-row>
-    <div v-loading="loading" style="min-width: 600px; min-height: 600px">
-        <postcard v-for="post in posts" v-bind="post"/>
+              </q-chip>
+            </template>
+          </div>
+
+          <div>
+            {{ postsFetch.data.value }}
+          </div>
+        </q-card>
+      </div>
+      <div>
+        <UserDetailCard class="mx-auto max-w-96">
+          <q-card-section></q-card-section>
+        </UserDetailCard>
+      </div>
     </div>
+  </q-page>
 </template>
-
-<style scoped>
-
-</style>

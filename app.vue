@@ -1,13 +1,15 @@
-<script setup>
-
+<script lang="ts" setup>
+if (process.client) {
+  Notify.setDefaults({
+    position: "bottom-right",
+  });
+}
 </script>
 
 <template>
+  <div>
     <NuxtLayout>
-        <NuxtPage/>
+      <NuxtPage></NuxtPage>
     </NuxtLayout>
+  </div>
 </template>
-
-<style>
-    @import url("./assets/minireset.css");
-</style>
