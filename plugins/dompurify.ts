@@ -1,6 +1,6 @@
 import createDOMPurify from "dompurify";
 
-export default async function defineNuxtPlugin() {
+export default defineNuxtPlugin(async () => {
   let dompurify;
   if (process.server) {
     const { JSDOM } = await import("jsdom");
@@ -13,4 +13,4 @@ export default async function defineNuxtPlugin() {
       dompurify,
     },
   };
-}
+});

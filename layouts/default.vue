@@ -1,17 +1,34 @@
+<script setup lang="ts">
+import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
+
+const route = useRoute();
+
+const searchText = useSearchText();
+</script>
+
 <template>
   <div>
-    <q-layout view="hHh lpR fff">
-      <q-header elevated class="bg-primary text-white">
-        <q-toolbar>
-          <q-toolbar-title>
-            <NuxtLink to="/">Blog</NuxtLink>
-          </q-toolbar-title>
-        </q-toolbar>
-      </q-header>
+    <OverlayScrollbarsComponent class="max-h-screen max-w-screen">
+      <q-layout view="hHh lpR fff">
+        <q-header elevated class="bg-primary text-white">
+          <q-toolbar>
+            <q-toolbar-title class="flex items-center">
+              <NuxtLink to="/">Blog</NuxtLink>
 
-      <q-page-container>
-        <slot />
-      </q-page-container>
-    </q-layout>
+              <HeaderSearchBar
+                v-if="route.name === 'index'"
+                v-model="searchText"
+              ></HeaderSearchBar>
+            </q-toolbar-title>
+
+            <HeaderAuthButton></HeaderAuthButton>
+          </q-toolbar>
+        </q-header>
+
+        <q-page-container>
+          <slot />
+        </q-page-container>
+      </q-layout>
+    </OverlayScrollbarsComponent>
   </div>
 </template>

@@ -8,6 +8,7 @@ if (process.client) {
 
 <template>
   <div>
+    <NuxtLoadingIndicator color="#ffffffaa"></NuxtLoadingIndicator>
     <NuxtLayout>
       <NuxtPage></NuxtPage>
     </NuxtLayout>

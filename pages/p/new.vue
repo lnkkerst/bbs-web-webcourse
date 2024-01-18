@@ -3,6 +3,15 @@ import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 
 const router = useRouter();
+const userStore = useUserStore();
+if (!userStore.user) {
+  Notify.create({
+    type: "warning",
+    message: "请先登录",
+  });
+  router.push("/auth");
+}
+
 const title = ref("");
 const content = ref("");
 const selectedNode = ref({ id: -1, name: "请选择" });
@@ -51,16 +60,17 @@ async function handleSubmit() {
     <div class="mx-auto py-6 w-96/100 max-w-256">
       <div class="flex">
         <h1 class="flex-grow text-h4 pt-2 pb-6 text-medium">发布新帖子</h1>
-        <div>
-          <q-select
-            v-model="selectedNode"
-            :options="nodesFetch.data.value ?? []"
-            option-value="id"
-            option-label="name"
-            label="发布板块"
-            class="min-w-36"
-          ></q-select>
-        </div>
+      </div>
+
+      <div>
+        <q-select
+          v-model="selectedNode"
+          :options="nodesFetch.data.value ?? []"
+          option-value="id"
+          option-label="name"
+          label="发布板块"
+          class="min-w-36"
+        ></q-select>
       </div>
 
       <q-input v-model="title" label="请输入标题"></q-input>

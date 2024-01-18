@@ -9,6 +9,7 @@ import {
   transformerAttributifyJsx,
   transformerDirectives,
 } from "unocss";
+import { presetScrollbar } from "unocss-preset-scrollbar";
 
 export default defineConfig({
   presets: [
@@ -18,6 +19,7 @@ export default defineConfig({
     presetWebFonts(),
     presetTypography(),
     presetAttributify(),
+    presetScrollbar(),
   ],
   transformers: [transformerDirectives(), transformerAttributifyJsx()],
 });

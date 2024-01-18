@@ -1,16 +1,25 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const userStore = useUserStore();
+</script>
 
 <template>
   <q-page>
-    <div
-      class="mx-auto py-6 w-96/100 max-w-256 grid grid-rows-2 grid-cols-1 md:grid-cols-[1fr_288px] md:grid-rows-1 gap-4"
-    >
-      <div class="">
+    <div class="mx-auto py-6 w-96/100 max-w-256 gap-4 flex flex-nowrap">
+      <div class="grow min-w-0">
         <NuxtPage />
       </div>
 
-      <div>
-        <UserDetailCard class="mx-auto max-w-96"></UserDetailCard>
+      <div class="w-288px">
+        <UserDetailCard
+          v-if="userStore.user"
+          class="mx-auto max-w-96"
+        ></UserDetailCard>
+        <q-card v-else>
+          <q-card-section>
+            请先
+            <NuxtLink to="/auth">登录</NuxtLink>
+          </q-card-section>
+        </q-card>
 
         <q-card class="mt-4">
           <NuxtLink to="/p/new">

@@ -18,33 +18,60 @@ const submitting = ref(false);
 
 async function handleSubmit() {
   submitting.value = true;
-  try {
-    await userStore.login({
-      username: form.value.username,
-      password: form.value.password,
-    });
-
-    Notify.create({
-      type: "positive",
-      message: "登录成功",
-    });
-
-    router.push("/");
-  } catch (_e) {
-    const e = _e as any;
-    if (e.status === 401) {
-      Notify.create({
-        type: "negative",
-        message: "用户名或密码错误，登录失败",
+  if (!register.value) {
+    try {
+      await userStore.login({
+        username: form.value.username,
+        password: form.value.password,
       });
-    } else {
+
       Notify.create({
-        type: "negative",
-        message: "未知错误，登录失败",
+        type: "positive",
+        message: "登录成功",
       });
+
+      router.push("/");
+    } catch (_e) {
+      const e = _e as any;
+      if (e.status === 401) {
+        Notify.create({
+          type: "negative",
+          message: "用户名或密码错误，登录失败",
+        });
+      } else {
+        Notify.create({
+          type: "negative",
+          message: "未知错误，登录失败",
+        });
+      }
+    } finally {
+      submitting.value = false;
     }
-  } finally {
-    submitting.value = false;
+  } else {
+    const { $blogFetch } = useNuxtApp();
+    try {
+      await $blogFetch("/api/register", {
+        method: "POST",
+        body: {
+          email: form.value.email,
+          login: form.value.username,
+          password: form.value.password,
+          firstName: form.value.username,
+        },
+      });
+      Notify.create({
+        type: "positive",
+        message: "注册成功",
+      });
+      register.value = false;
+    } catch (_e) {
+      Notify.create({
+        type: "negative",
+        message: "注册失败，未知错误",
+      });
+    } finally {
+      submitting.value = false;
+    }
   }
 }
 

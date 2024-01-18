@@ -15,12 +15,12 @@ const postHtml = computed(() => {
   return $dompurify.sanitize(marked.parse(content) as string);
 });
 const user = computed(() => postFetch.data.value?.user);
-const commentCountFetch = useBlogFetch("/api/comments/count", {
+const commentCountFetch = await useBlogFetch("/api/comments/count", {
   query: computed(() => ({
     "postId.equals": postFetch.data.value?.id ?? -1,
   })),
 });
-const favCountFetch = useBlogFetch("/api/favorites/count", {
+const favCountFetch = await useBlogFetch("/api/favorites/count", {
   query: computed(() => ({
     "type.equals": "NODE" as any,
     "postId.equals": postFetch.data.value?.id ?? -1,
@@ -69,6 +69,8 @@ const favCountFetch = useBlogFetch("/api/favorites/count", {
       </q-card-section>
     </q-card>
 
-    <q-card></q-card>
+    <PostCommentCard
+      :post-id="postFetch.data.value?.id ?? -1"
+    ></PostCommentCard>
   </div>
 </template>

@@ -13,7 +13,6 @@ export const useUserStore = defineStore("user", {
     }) {
       const { $blogFetch } = useNuxtApp();
       const apiBase = useRuntimeConfig().public.blogApiBase;
-      console.log(useRuntimeConfig());
 
       const res = await $fetch<{ id_token: string }>(
         `${apiBase}/api/authenticate`,
