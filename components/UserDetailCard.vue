@@ -62,36 +62,34 @@ const items = ref([
 
 <template>
   <div>
-    <q-card>
-      <q-card-section horizontal>
-        <q-card-section>
-          <q-avatar size="72px">
-            <q-img :src="userStore.user?.imageUrl || defaultAvatar"></q-img>
-          </q-avatar>
-        </q-card-section>
-
-        <q-card-section class="pl-0">
-          <div class="">
-            <span class="text-4 truncate">
-              {{ userStore.user?.firstName }}
-            </span>
-            <span class="text-gray-6">{{ `@${userStore.user?.login}` }}</span>
-          </div>
-          <div class="text-gray-5">
-            {{ userStore.user?.lastName }}
-          </div>
-        </q-card-section>
+    <q-card-section horizontal>
+      <q-card-section>
+        <q-avatar size="72px">
+          <q-img :src="userStore.user?.imageUrl || defaultAvatar"></q-img>
+        </q-avatar>
       </q-card-section>
 
-      <q-card-section>
-        <div class="grid grid-cols-3 gap-2">
-          <div v-for="item in items" :key="item.title">
-            <div class="text-center">{{ item.title }}</div>
-            <div class="text-center">{{ item.content }}</div>
-          </div>
+      <q-card-section class="pl-0">
+        <div class="">
+          <span class="text-4 truncate">
+            {{ userStore.user?.firstName }}
+          </span>
+          <span class="text-gray-6">{{ `@${userStore.user?.login}` }}</span>
+        </div>
+        <div class="text-gray-5">
+          {{ userStore.user?.lastName }}
         </div>
       </q-card-section>
-    </q-card>
+    </q-card-section>
+
+    <q-card-section>
+      <div class="grid grid-cols-3 gap-2">
+        <div v-for="item in items" :key="item.title">
+          <div class="text-center">{{ item.title }}</div>
+          <div class="text-center">{{ item.content }}</div>
+        </div>
+      </div>
+    </q-card-section>
   </div>
 </template>
 

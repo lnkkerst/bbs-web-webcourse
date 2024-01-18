@@ -15,7 +15,7 @@ const emit = defineEmits<{
     :model-value="props.modelValue"
     type="text"
     @update:model-value="v => emit('update:modelValue', v ? v.toString() : '')"
-    class="q-ml-md"
+    class="q-ml-md w-36 md:w-64"
   >
     <template v-slot:append>
       <q-icon v-if="props.modelValue === ''" name="mdi-magnify" />

@@ -56,10 +56,10 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <q-page>
-    <div class="mx-auto py-6 w-96/100 max-w-256">
+  <q-page padding>
+    <div class="mx-auto py-6 w-full max-w-256">
       <div class="flex">
-        <h1 class="flex-grow text-h4 pt-2 pb-6 text-medium">发布新帖子</h1>
+        <h1 class="flex-grow text-h4 pb-6 text-medium">发布新帖子</h1>
       </div>
 
       <div>

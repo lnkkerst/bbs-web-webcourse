@@ -66,6 +66,14 @@ const postsFetch = await useBlogFetch("/api/posts", {
         :showing="postsFetch.pending.value"
         class="z-10"
       ></q-inner-loading>
+
+      <div
+        v-if="postsFetch.data.value?.length === 0"
+        class="text-center text-gray-5"
+      >
+        你来到了知识的荒原～
+      </div>
+
       <template v-for="post in postsFetch.data.value">
         <NuxtLink :to="`/p/${post.id}`">
           <q-item clickable>
@@ -78,7 +86,7 @@ const postsFetch = await useBlogFetch("/api/posts", {
             <q-item-section>
               <q-item-label>{{ post.title }}</q-item-label>
 
-              <q-item-label caption class="max-w-1/2">
+              <q-item-label caption class="">
                 <span>{{ `${post.user.firstName} 发布在` }}</span>
                 <q-chip :label="post.node.name" dense square></q-chip>
               </q-item-label>
