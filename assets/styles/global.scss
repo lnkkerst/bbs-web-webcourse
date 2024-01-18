@@ -1,2 +1,23 @@
 @import url("@unocss/reset/tailwind.css");
 @import url("overlayscrollbars/overlayscrollbars.css");
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.2s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
+  // filter: blur(1rem);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

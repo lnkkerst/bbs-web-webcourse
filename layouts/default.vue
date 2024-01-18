@@ -15,10 +15,12 @@ const searchText = useSearchText();
             <q-toolbar-title class="flex items-center">
               <NuxtLink to="/">Blog</NuxtLink>
 
-              <HeaderSearchBar
-                v-if="route.name === 'index'"
-                v-model="searchText"
-              ></HeaderSearchBar>
+              <Transition name="fade">
+                <HeaderSearchBar
+                  v-if="route.name === 'index'"
+                  v-model="searchText"
+                ></HeaderSearchBar>
+              </Transition>
             </q-toolbar-title>
 
             <HeaderAuthButton></HeaderAuthButton>

@@ -9,7 +9,7 @@ const userStore = useUserStore();
         <NuxtPage />
       </div>
 
-      <div class="w-288px">
+      <div class="w-288px min-w-288px">
         <UserDetailCard
           v-if="userStore.user"
           class="mx-auto max-w-96"
@@ -17,7 +17,12 @@ const userStore = useUserStore();
         <q-card v-else>
           <q-card-section>
             请先
-            <NuxtLink to="/auth">登录</NuxtLink>
+            <NuxtLink
+              to="/auth"
+              class="text-primary hover:opacity-80 active:opacity-60"
+            >
+              登录
+            </NuxtLink>
           </q-card-section>
         </q-card>
 

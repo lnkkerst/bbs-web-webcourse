@@ -1,5 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
+  app: {
+    pageTransition: {
+      name: "page",
+      mode: "out-in",
+    },
+  },
   devtools: { enabled: true },
   css: ["./assets/styles/global.scss"],
   modules: [
@@ -12,6 +19,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
     "@formkit/auto-animate",
+    "@hypernym/nuxt-anime",
   ],
   runtimeConfig: {
     public: {
@@ -31,5 +39,9 @@ export default defineNuxtConfig({
     plugins: ["Notify", "Loading", "Dialog"],
     lang: "zh-CN",
     sassVariables: "./assets/styles/quasar.variables.scss",
+  },
+  anime: {
+    provide: false,
+    composables: true,
   },
 });
