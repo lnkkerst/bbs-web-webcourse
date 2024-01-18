@@ -9,7 +9,7 @@ if (!userStore.user) {
     type: "warning",
     message: "请先登录",
   });
-  router.push("/auth");
+  router.replace("/auth");
 }
 
 const title = ref("");

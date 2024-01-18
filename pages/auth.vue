@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { z } from "zod";
+
 definePageMeta({
   name: "auth",
 });
 
 const router = useRouter();
 const userStore = useUserStore();
+
+const formEl = ref();
 
 // default to login
 const register = ref(false);
@@ -15,8 +19,17 @@ const form = ref({
 });
 const displayLabel = computed(() => (register.value ? "注册" : "登录"));
 const submitting = ref(false);
+const routing = ref(false);
 
 async function handleSubmit() {
+  if (!formEl.value) {
+    return;
+  }
+
+  if (!(await formEl.value.validate?.())) {
+    return;
+  }
+
   submitting.value = true;
   if (!register.value) {
     try {
@@ -30,6 +43,7 @@ async function handleSubmit() {
         message: "登录成功",
       });
 
+      routing.value = true;
       router.push("/");
     } catch (_e) {
       const e = _e as any;
@@ -77,6 +91,9 @@ async function handleSubmit() {
 
 function handleReset() {
   form.value = { email: "", username: "", password: "" };
+  if (formEl.value) {
+    formEl.value.resetValidation?.();
+  }
 }
 </script>
 
@@ -84,7 +101,7 @@ function handleReset() {
   <div>
     <q-page padding class="grid place-items-center">
       <q-card class="w-full max-w-96">
-        <q-card-section class="bg-primary text-center">
+        <q-card-section class="bg-primary text-center py-8">
           <span class="text-xl font-medium text-white">
             {{ displayLabel }}
           </span>
@@ -97,34 +114,53 @@ function handleReset() {
           ></QFab>
         </q-card-section>
 
-        <q-card-section>
-          <q-form class="q-gutter-md">
+        <q-card-section class="px-6 pt-8">
+          <q-form class="q-gutter-md" ref="formEl">
             <q-input
-              v-show="register"
+              v-if="register"
               v-model="form.email"
               label="邮箱"
               type="email"
+              :rules="[
+                v =>
+                  z.string().email().safeParse(v).success || '邮箱格式不合法',
+              ]"
+              lazy-rules
             ></q-input>
 
             <q-input
               v-model="form.username"
               label="用户名"
               type="text"
+              :rules="[
+                v =>
+                  z.string().min(4).max(20).safeParse(v).success ||
+                  '用户名长度必须介于4到20个字符之间',
+              ]"
+              lazy-rules
             ></q-input>
 
             <q-input
               v-model="form.password"
               label="密码"
               type="password"
+              :rules="[
+                v =>
+                  z.string().min(4).max(36).safeParse(v).success ||
+                  '密码长度必须介于4到36个字符之间',
+              ]"
+              lazy-rules
             ></q-input>
 
             <div class="flex justify-center">
               <q-btn
-                :label="displayLabel"
+                :label="routing ? undefined : displayLabel"
+                :icon="routing ? 'mdi-check' : undefined"
                 type="submit"
                 color="primary"
                 @click.prevent="handleSubmit"
                 :loading="submitting"
+                :disable="routing"
               ></q-btn>
 
               <q-btn
