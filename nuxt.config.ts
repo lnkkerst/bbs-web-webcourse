@@ -9,6 +9,11 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ["./assets/styles/global.scss"],
+  vite: {
+    optimizeDeps: {
+      include: ["marked", "md-editor-v3", "zod", "overlayscrollbars-vue"],
+    },
+  },
   modules: [
     "@vueuse/nuxt",
     "nuxt-open-fetch",

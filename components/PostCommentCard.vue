@@ -134,13 +134,20 @@ function scrollToComment(id: number) {
       </div>
     </q-card-section>
 
-    <q-card-section class="pl-6 pr-4">
-      <q-timeline color="primary">
+    <q-card-section class="pl-6 pr-4 relative">
+      <q-inner-loading
+        :showing="commentsFetch.pending.value"
+        color="primary"
+        class="z-10"
+      ></q-inner-loading>
+
+      <q-timeline color="primary" v-auto-animate>
         <div
           v-for="comment in commentsFetch.data.value"
           ref="commentsEl"
           class="scroll-mt-20"
           :data-comment-id="comment.id"
+          :key="comment.id"
         >
           <q-timeline-entry :avatar="comment.user.imageUrl || defaultAvatar">
             <template #subtitle>

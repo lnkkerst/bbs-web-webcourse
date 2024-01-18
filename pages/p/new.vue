@@ -2,6 +2,8 @@
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 
+import { z } from "zod";
+
 const router = useRouter();
 const userStore = useUserStore();
 if (!userStore.user) {
@@ -12,13 +14,36 @@ if (!userStore.user) {
   router.replace("/auth");
 }
 
+const nodeSelectEl = ref();
+const titleInputEl = ref();
+
 const title = ref("");
 const content = ref("");
 const selectedNode = ref({ id: -1, name: "请选择" });
 const nodesFetch = await useBlogFetch("/api/nodes");
 const submitting = ref(false);
+const routing = ref(false);
 
 async function handleSubmit() {
+  if (!nodeSelectEl.value || !titleInputEl.value) {
+    return;
+  }
+
+  if (
+    !(await nodeSelectEl.value.validate?.()) ||
+    !(await titleInputEl.value.validate?.())
+  ) {
+    return;
+  }
+
+  if (content.value.length < 5 || content.value.length > 4096) {
+    Notify.create({
+      type: "warning",
+      message: "正文内容的长度必须在5到4096之间",
+    });
+    return;
+  }
+
   submitting.value = true;
   const { $blogFetch } = useNuxtApp();
   const userStore = useUserStore();
@@ -43,6 +68,7 @@ async function handleSubmit() {
       message: "发布成功",
     });
 
+    routing.value = true;
     router.push(`/p/${res.id}`);
   } catch (_e) {
     Notify.create({
@@ -64,32 +90,42 @@ async function handleSubmit() {
 
       <div>
         <q-select
+          ref="nodeSelectEl"
           v-model="selectedNode"
           :options="nodesFetch.data.value ?? []"
           option-value="id"
           option-label="name"
           label="发布板块"
           class="min-w-36"
+          :rules="[v => v.id !== -1 || '请选择板块']"
+          lazy-rules
         ></q-select>
       </div>
 
-      <q-input v-model="title" label="请输入标题"></q-input>
+      <q-input
+        ref="titleInputEl"
+        v-model="title"
+        label="请输入标题"
+        :rules="[
+          v =>
+            z.string().min(4).max(64).safeParse(v).success ||
+            '标题长度必须介于4和64之间',
+        ]"
+      ></q-input>
 
-      <q-card class="mt-4">
-        <ClientOnly>
-          <MdEditor v-model="content" class="w-full"></MdEditor>
-        </ClientOnly>
-      </q-card>
+      <ClientOnly>
+        <MdEditor v-model="content" class="w-full mt-4 my-2"></MdEditor>
+      </ClientOnly>
 
       <q-btn
         class="mx-auto mt-4 w-full"
         color="primary"
-        :disable="selectedNode.id === -1"
+        :icon="routing ? 'mdi-check' : undefined"
+        :disable="selectedNode.id === -1 || routing"
         :loading="submitting"
+        :label="!routing ? '发布' : '跳转中'"
         @click.prevent="handleSubmit"
-      >
-        发布
-      </q-btn>
+      ></q-btn>
     </div>
   </q-page>
 </template>

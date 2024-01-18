@@ -107,7 +107,7 @@ function handleReset() {
           </span>
 
           <QFab
-            color="secondary"
+            color="accent"
             icon="mdi-plus"
             class="absolute bottom-0 right-4 translate-y-1/2"
             v-model="register"
@@ -154,7 +154,7 @@ function handleReset() {
 
             <div class="flex justify-center">
               <q-btn
-                :label="routing ? undefined : displayLabel"
+                :label="routing ? '跳转中' : displayLabel"
                 :icon="routing ? 'mdi-check' : undefined"
                 type="submit"
                 color="primary"

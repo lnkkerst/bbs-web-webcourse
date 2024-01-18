@@ -40,6 +40,7 @@ const items = ref([
   {
     title: "用户收藏",
     content: usersFavCount,
+    to: "/f/users",
   },
   {
     title: "帖子收藏",
@@ -84,10 +85,10 @@ const items = ref([
 
     <q-card-section>
       <div class="grid grid-cols-3 gap-2">
-        <div v-for="item in items" :key="item.title">
+        <NuxtLink v-for="item in items" :key="item.title" :to="item.to">
           <div class="text-center">{{ item.title }}</div>
           <div class="text-center">{{ item.content }}</div>
-        </div>
+        </NuxtLink>
       </div>
     </q-card-section>
   </div>

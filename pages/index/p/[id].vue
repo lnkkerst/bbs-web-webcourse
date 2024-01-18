@@ -40,7 +40,9 @@ const favCountFetch = await useBlogFetch("/api/favorites/count", {
             <div class="flex-grow">
               <h1>{{ postFetch.data.value?.title }}</h1>
               <div class="text-gray-5">
-                <span>{{ `${user?.firstName}@${user?.login}` }}</span>
+                <NuxtLink :to="`/u/${user?.id}`">
+                  {{ `${user?.firstName}@${user?.login}` }}
+                </NuxtLink>
                 <span class="mx-2" v-if="postFetch.data.value?.createdAt">
                   {{
                     new Date(postFetch.data.value?.createdAt).toLocaleString()
@@ -55,11 +57,13 @@ const favCountFetch = await useBlogFetch("/api/favorites/count", {
               </div>
             </div>
 
-            <q-avatar size="64px" class="my-4">
-              <q-img
-                :src="postFetch.data.value?.user.imageUrl || defaultAvatar"
-              ></q-img>
-            </q-avatar>
+            <NuxtLink :to="`/u/${user?.id}`">
+              <q-avatar size="64px" class="my-4">
+                <q-img
+                  :src="postFetch.data.value?.user.imageUrl || defaultAvatar"
+                ></q-img>
+              </q-avatar>
+            </NuxtLink>
           </div>
 
           <q-separator></q-separator>
