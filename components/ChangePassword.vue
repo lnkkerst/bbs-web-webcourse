@@ -8,6 +8,7 @@ const formEl = ref();
 const form = ref({
   currentPassword: "",
   newPassword: "",
+  repeatPassword: "",
 });
 
 const submitting = ref(false);
@@ -81,7 +82,7 @@ async function handleSubmit() {
       ></q-input>
 
       <q-input
-        v-model="form.newPassword"
+        v-model="form.repeatPassword"
         label="重复密码"
         type="password"
         :rules="[v => v === form.newPassword || '两次输入的密码不一样']"
