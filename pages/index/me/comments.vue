@@ -12,8 +12,12 @@ const commentsFetch = await useBlogFetch("/api/comments", {
 </script>
 
 <template>
-  <q-card>
-    <q-list>
+  <q-card class="relative">
+    <q-list class="">
+      <q-inner-loading
+        color="primary"
+        :showing="commentsFetch.pending.value"
+      ></q-inner-loading>
       <template v-for="comment in commentsFetch.data.value">
         <NuxtLink :to="`/p/${comment.post?.id}`">
           <q-item clickable>
@@ -41,5 +45,11 @@ const commentsFetch = await useBlogFetch("/api/comments", {
         <q-separator></q-separator>
       </template>
     </q-list>
+
+    <q-card-section
+      v-if="!commentsFetch.data.value || commentsFetch.data.value.length === 0"
+    >
+      你还没有评论
+    </q-card-section>
   </q-card>
 </template>
