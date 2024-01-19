@@ -7,7 +7,10 @@ const emit = defineEmits<{
 
 const nodesFetch = await useBlogFetch("/api/nodes");
 const nodes = computed(() => {
-  const res: Array<Node> = [{ id: -1, name: "全部" }];
+  const res: Array<Node> = [
+    { id: -1, name: "全部" },
+    { id: -2, name: "收藏" },
+  ];
   if (nodesFetch.data.value) {
     res.push(...nodesFetch.data.value);
   }

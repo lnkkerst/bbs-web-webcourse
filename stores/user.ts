@@ -31,6 +31,11 @@ export const useUserStore = defineStore("user", {
       this.token = "";
       this.user = undefined;
     },
+    async refresh() {
+      const { $blogFetch } = useNuxtApp();
+      const resUser = await $blogFetch("/api/account", {});
+      this.user = resUser;
+    },
   },
   persist: true,
 });

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { z } from "zod";
+import sha256 from "crypto-js/sha256";
 
 definePageMeta({
   name: "auth",
@@ -16,6 +17,7 @@ const form = ref({
   email: "",
   username: "",
   password: "",
+  repeatPassowrd: "",
 });
 const displayLabel = computed(() => (register.value ? "注册" : "登录"));
 const submitting = ref(false);
@@ -71,6 +73,8 @@ async function handleSubmit() {
           login: form.value.username,
           password: form.value.password,
           firstName: form.value.username,
+          lastName: "因为个性所以没签名",
+          imageUrl: `https://i2.wp.com/gravatar.loli.net/avatar/${sha256(form.value.email)}`,
         },
       });
       Notify.create({
@@ -90,7 +94,7 @@ async function handleSubmit() {
 }
 
 function handleReset() {
-  form.value = { email: "", username: "", password: "" };
+  form.value = { email: "", username: "", password: "", repeatPassowrd: "" };
   if (formEl.value) {
     formEl.value.resetValidation?.();
   }
@@ -130,10 +134,11 @@ function handleReset() {
 
             <q-input
               v-model="form.username"
-              label="用户名"
+              label="用户名 or 邮箱"
               type="text"
               :rules="[
                 v =>
+                  z.string().email().safeParse(v).success ||
                   z.string().min(4).max(20).safeParse(v).success ||
                   '用户名长度必须介于4到20个字符之间',
               ]"
@@ -149,6 +154,15 @@ function handleReset() {
                   z.string().min(4).max(36).safeParse(v).success ||
                   '密码长度必须介于4到36个字符之间',
               ]"
+              lazy-rules
+            ></q-input>
+
+            <q-input
+              v-model="form.repeatPassowrd"
+              v-if="register"
+              label="重复密码"
+              type="password"
+              :rules="[v => v === form.password || '两次输入的密码不一样']"
               lazy-rules
             ></q-input>
 
