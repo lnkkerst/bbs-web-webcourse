@@ -16,7 +16,7 @@ const drawer = ref(false);
         <q-header elevated class="bg-primary text-white">
           <q-toolbar>
             <q-toolbar-title class="flex items-center">
-              <NuxtLink to="/">Blog</NuxtLink>
+              <NuxtLink to="/">BBS</NuxtLink>
 
               <Transition name="fade">
                 <HeaderSearchBar
