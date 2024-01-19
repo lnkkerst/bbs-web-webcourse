@@ -5,13 +5,13 @@ const userStore = useUserStore();
 <template>
   <q-page class="px-xl">
     <div
-      class="mx-auto py-6 w-full max-w-256 gap-4 flex flex-col md:flex-row flex-nowrap items-center md:items-start"
+      class="mx-auto py-6 w-full max-w-256 gap-4 flex flex-nowrap items-center md:items-start"
     >
       <div class="grow min-w-0">
         <NuxtPage />
       </div>
 
-      <div class="w-288px min-w-288px">
+      <div class="w-288px min-w-288px hidden md:block!">
         <q-card v-if="userStore.user">
           <UserDetailCard class="mx-auto max-w-96"></UserDetailCard>
         </q-card>

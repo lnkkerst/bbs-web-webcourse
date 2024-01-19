@@ -12,7 +12,7 @@ const commentsFetch = await useBlogFetch("/api/comments", {
 </script>
 
 <template>
-  <q-card class="relative">
+  <q-card class="relative w-full">
     <q-list class="">
       <q-inner-loading
         color="primary"
