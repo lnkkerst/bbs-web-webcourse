@@ -103,10 +103,12 @@ async function handleFollow() {
       </q-item-section>
 
       <q-item-section>
-        <q-item-label>
-          <span class="text-4">{{ user?.firstName }}</span>
-          <span class="text-sm text-gray-5">{{ `@${user?.login}` }}</span>
-        </q-item-label>
+        <NuxtLink :to="`/u/${user?.id}`">
+          <q-item-label>
+            <span class="text-4">{{ user?.firstName }}</span>
+            <span class="text-sm text-gray-5">{{ `@${user?.login}` }}</span>
+          </q-item-label>
+        </NuxtLink>
 
         <q-item-label class="text-sm" caption>
           {{ user?.lastName }}
