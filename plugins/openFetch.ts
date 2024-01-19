@@ -33,6 +33,14 @@ export default defineNuxtPlugin(() => {
               });
               useRouter().push({ name: "auth" });
             }
+
+            if (response.status.toString()[0] === "5") {
+              Notify.create({
+                message: "服务器开小差了～",
+                type: "warning",
+                position: "bottom-right",
+              });
+            }
           },
         })),
       ]),
