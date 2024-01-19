@@ -4,6 +4,10 @@ if (process.client) {
     position: "bottom-right",
   });
 }
+
+useHead({
+  title: "简单的论坛",
+});
 </script>
 
 <template>
