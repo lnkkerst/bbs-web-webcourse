@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { z } from "zod";
 import type { Comment } from "~/types/blogApi";
 
 const props = defineProps<{ postId: number }>();
@@ -19,6 +20,7 @@ const commentsFetch = await useBlogFetch("/api/comments", {
   ),
 });
 const newCommentText = ref("");
+const newCommentTextEl = ref();
 const replyId = ref<number>();
 const submitting = ref(false);
 const commentsIdMap = computed(() => {
@@ -34,6 +36,14 @@ const commentsIdMap = computed(() => {
 const commentsEl = ref<HTMLElement[]>([]);
 
 async function handleSubmit() {
+  if (!newCommentTextEl.value) {
+    return;
+  }
+
+  if (!(await newCommentTextEl.value.validate?.())) {
+    return;
+  }
+
   const { $blogFetch } = useNuxtApp();
   submitting.value = true;
   try {
@@ -119,7 +129,17 @@ function scrollToComment(id: number) {
         </div>
 
         <template v-if="userStore.user">
-          <q-input type="textarea" v-model="newCommentText"></q-input>
+          <q-input
+            ref="newCommentTextEl"
+            type="textarea"
+            v-model="newCommentText"
+            :rules="[
+              v =>
+                z.string().min(1).max(1024).safeParse(v).success ||
+                '评论字数必须在1～1024之间',
+            ]"
+            lazy-rules
+          ></q-input>
 
           <div class="flex mt-4 justify-end">
             <q-btn

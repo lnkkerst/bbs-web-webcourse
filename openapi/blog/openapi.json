@@ -2007,16 +2007,16 @@
         }
       }
     },
-    "/api/users/{login}": {
+    "/api/users/{id}": {
       "get": {
         "tags": ["public-user-resource"],
-        "operationId": "getUserByLogin",
+        "operationId": "getUserById",
         "parameters": [
           {
-            "name": "login",
+            "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": { "type": "integer", "format": "int64" }
           }
         ],
         "responses": {
@@ -2029,11 +2029,18 @@
         }
       }
     },
-    "/api/users/{id}": {
+    "/api/users-by-login/{login}": {
       "get": {
         "tags": ["public-user-resource"],
-        "operationId": "getUserById",
-        "parameters": [],
+        "operationId": "getUserByLogin",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",

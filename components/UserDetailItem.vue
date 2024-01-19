@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import type { User, Favorite } from "~/types/blogApi";
+
 const props = defineProps<{
   userId: number;
 }>();
 
 const userStore = useUserStore();
 
-const userFetch = await useBlogFetch("/api/users/{id}", {
-  path: computed(() => ({ id: props.userId })),
-});
-const followStatusFetch = useBlogFetch("/api/favorites", {
+const { blogApiBase } = useRuntimeConfig().public;
+
+const userFetch = await useFetch<User>(
+  `${blogApiBase}/api/users/${props.userId}`,
+  { cache: "no-cache" },
+);
+// const userFetch = await useBlogFetch(`/api/users/${props.userId}`, {});
+const followStatusFetch = useFetch<Favorite[]>(`${blogApiBase}/api/favorites`, {
   query: computed(
     () =>
       ({

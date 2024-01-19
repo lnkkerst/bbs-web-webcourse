@@ -36,6 +36,7 @@ const items = ref([
   {
     title: "板块收藏",
     content: nodesFavCount,
+    to: "/f/nodes",
   },
   {
     title: "用户收藏",
@@ -45,18 +46,22 @@ const items = ref([
   {
     title: "帖子收藏",
     content: postsFavCount,
+    to: "/f/posts",
   },
   {
     title: "发帖数",
     content: postsCount,
+    to: "/me/posts",
   },
   {
     title: "评论数",
     content: commentsCount,
+    to: "/me/comments",
   },
   {
     title: "粉丝数",
     content: fansCount,
+    to: "/me/fans",
   },
 ]);
 </script>
