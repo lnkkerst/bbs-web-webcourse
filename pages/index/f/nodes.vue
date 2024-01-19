@@ -19,16 +19,17 @@ const favNodesFetch = await useFetch<Favorite[]>(
   },
 );
 const favNodeList = computed(() => {
-  const res: Node[] = [];
+  const res: (Node & { favId: number })[] = [];
   if (!nodesFetch.data.value || !favNodesFetch.data.value) {
     return res;
   }
-  return nodesFetch.data.value.filter(
-    node =>
-      favNodesFetch.data.value?.findIndex(val => {
-        return node.id === val.node?.id;
-      }) !== -1,
-  );
+  for (let node of nodesFetch.data.value) {
+    let fav = favNodesFetch.data.value.find(val => val.node?.id === node.id);
+    if (fav) {
+      res.push({ favId: fav.id!, ...node });
+    }
+  }
+  return res;
 });
 const otherNodeList = computed(() => {
   const res: Node[] = [];
@@ -116,7 +117,7 @@ async function handleDeleteNode(id?: number) {
         split
       >
         <q-list class="min-w-100px">
-          <q-item clickable v-close-popup @click="handleDeleteNode(node.id)">
+          <q-item clickable v-close-popup @click="handleDeleteNode(node.favId)">
             <q-item-section>删除</q-item-section>
           </q-item>
         </q-list>

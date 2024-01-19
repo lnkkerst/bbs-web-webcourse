@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { marked } from "marked";
 
-const router = useRouter();
 const route = useRoute();
 
+const postId = computed(() => {
+  return Number.parseInt(route.params.id as string);
+});
 const postFetch = await useBlogFetch("/api/posts/{id}", {
   path: {
-    id: Number.parseInt(route.params.id as string),
+    id: postId.value,
   },
 });
 const postHtml = computed(() => {
@@ -39,6 +41,7 @@ const favCountFetch = await useBlogFetch("/api/favorites/count", {
           <div class="flex justify-center items-center">
             <div class="flex-grow">
               <h1>{{ postFetch.data.value?.title }}</h1>
+
               <div class="text-gray-5">
                 <NuxtLink :to="`/u/${user?.id}`">
                   {{ `${user?.firstName}@${user?.login}` }}
@@ -70,6 +73,13 @@ const favCountFetch = await useBlogFetch("/api/favorites/count", {
 
           <div v-html="postHtml"></div>
         </div>
+      </q-card-section>
+
+      <q-card-section class="flex flex-row-reverse">
+        <PostFavoriteButton
+          :post-id="postId"
+          color="primary"
+        ></PostFavoriteButton>
       </q-card-section>
     </q-card>
 

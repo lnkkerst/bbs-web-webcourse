@@ -69,28 +69,37 @@ const items = ref([
 <template>
   <div>
     <q-card-section horizontal>
-      <q-card-section>
-        <q-avatar size="72px">
-          <q-img :src="userStore.user?.imageUrl || defaultAvatar"></q-img>
-        </q-avatar>
-      </q-card-section>
+      <NuxtLink to="/profile">
+        <q-card-section>
+          <q-avatar size="72px">
+            <q-img :src="userStore.user?.imageUrl || defaultAvatar"></q-img>
+          </q-avatar>
+        </q-card-section>
+      </NuxtLink>
 
-      <q-card-section class="pl-0">
-        <div class="">
-          <span class="text-4 truncate">
-            {{ userStore.user?.firstName }}
-          </span>
-          <span class="text-gray-6">{{ `@${userStore.user?.login}` }}</span>
-        </div>
-        <div class="text-gray-5">
-          {{ userStore.user?.lastName }}
-        </div>
-      </q-card-section>
+      <NuxtLink to="/profile">
+        <q-card-section class="pl-0">
+          <div class="">
+            <span class="text-4 truncate">
+              {{ userStore.user?.firstName }}
+            </span>
+            <span class="text-gray-6">{{ `@${userStore.user?.login}` }}</span>
+          </div>
+          <div class="text-gray-5">
+            {{ userStore.user?.lastName }}
+          </div>
+        </q-card-section>
+      </NuxtLink>
     </q-card-section>
 
     <q-card-section>
       <div class="grid grid-cols-3 gap-2">
-        <NuxtLink v-for="item in items" :key="item.title" :to="item.to">
+        <NuxtLink
+          v-for="item in items"
+          :key="item.title"
+          :to="item.to"
+          class="hover:opacity-70 active:opacity-50"
+        >
           <div class="text-center">{{ item.title }}</div>
           <div class="text-center">{{ item.content }}</div>
         </NuxtLink>

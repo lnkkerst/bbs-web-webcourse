@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { type Node } from "~/types/blogApi";
 const props = defineProps<{
   nodeId?: number[];
-  favOwnerId?: number;
+  userId?: number;
 }>();
 
 definePageMeta({
@@ -24,6 +23,7 @@ const postsFetch = await useBlogFetch("/api/posts", {
       page: page.value - 1,
       size: size.value,
       sort: "createdAt,desc",
+      ...(props.userId ? { "userId.equals": props.userId } : {}),
     })) as any,
     500,
   ) as any,

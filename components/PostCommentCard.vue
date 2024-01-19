@@ -161,7 +161,7 @@ function scrollToComment(id: number) {
         class="z-10"
       ></q-inner-loading>
 
-      <q-timeline color="primary" v-auto-animate>
+      <q-timeline color="primary">
         <div
           v-for="comment in commentsFetch.data.value"
           ref="commentsEl"
