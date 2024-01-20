@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Post } from "~/types/blogApi";
+import type { Favorite, Post } from "~/types/blogApi";
 
-const { $blogFetch } = useNuxtApp();
 const userStore = useUserStore();
+const { $apiFetch } = useNuxtApp();
 
-const postsFavFetch = await useBlogFetch("/api/favorites", {
+const postsFavFetch = await useApiFetch<Favorite[]>("/api/favorites", {
   query: {
     "type.equals": "POST",
     "ownerId.equals": userStore.user?.id,
@@ -21,9 +21,7 @@ const posts = asyncComputed(async () => {
       if (!fav.post?.id) {
         return;
       }
-      const post = await $blogFetch("/api/posts/{id}", {
-        path: { id: fav.post.id },
-      });
+      const post = await $apiFetch(`/api/posts/${fav.post.id}`, {});
       res.push(post);
     }),
   );

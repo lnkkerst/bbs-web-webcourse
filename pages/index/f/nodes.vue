@@ -2,10 +2,10 @@
 import type { Favorite, Node } from "~/types/blogApi";
 
 const userStore = useUserStore();
-
 const { blogApiBase } = useRuntimeConfig().public;
+const { $apiFetch } = useNuxtApp();
 
-const nodesFetch = await useBlogFetch("/api/nodes");
+const nodesFetch = await useApiFetch<Node[]>("/api/nodes");
 const favNodesFetch = await useFetch<Favorite[]>(
   `${blogApiBase}/api/favorites`,
   {
@@ -48,10 +48,9 @@ async function handleAddNode(id?: number) {
   if (!id || id === -1) {
     return;
   }
-  const { $blogFetch } = useNuxtApp();
   try {
     adding.value = true;
-    await $blogFetch("/api/favorites", {
+    await $apiFetch("/api/favorites", {
       method: "POST",
       body: {
         type: "NODE",
@@ -82,14 +81,10 @@ async function handleDeleteNode(id?: number) {
   if (!id || id === -1) {
     return;
   }
-  const { $blogFetch } = useNuxtApp();
   try {
     adding.value = true;
-    await $blogFetch("/api/favorites/{id}", {
+    await $apiFetch(`/api/favorites/${id}`, {
       method: "DELETE",
-      path: {
-        id,
-      },
     });
     Notify.create({
       type: "positive",

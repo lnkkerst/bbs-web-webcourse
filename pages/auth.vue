@@ -8,6 +8,7 @@ definePageMeta({
 
 const router = useRouter();
 const userStore = useUserStore();
+const { $apiFetch } = useNuxtApp();
 
 const formEl = ref();
 
@@ -64,9 +65,8 @@ async function handleSubmit() {
       submitting.value = false;
     }
   } else {
-    const { $blogFetch } = useNuxtApp();
     try {
-      await $blogFetch("/api/register", {
+      await $apiFetch("/api/register", {
         method: "POST",
         body: {
           email: form.value.email,

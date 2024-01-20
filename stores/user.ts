@@ -11,7 +11,7 @@ export const useUserStore = defineStore("user", {
       username: string;
       password: string;
     }) {
-      const { $blogFetch } = useNuxtApp();
+      const { $apiFetch } = useNuxtApp();
       const apiBase = useRuntimeConfig().public.blogApiBase;
 
       const res = await $fetch<{ id_token: string }>(
@@ -24,7 +24,7 @@ export const useUserStore = defineStore("user", {
 
       this.token = res.id_token ?? "";
 
-      const resUser = await $blogFetch("/api/account", {});
+      const resUser = await $apiFetch("/api/account", {});
       this.user = resUser;
     },
     async logout() {
@@ -32,8 +32,8 @@ export const useUserStore = defineStore("user", {
       this.user = undefined;
     },
     async refresh() {
-      const { $blogFetch } = useNuxtApp();
-      const resUser = await $blogFetch("/api/account", {});
+      const { $apiFetch } = useNuxtApp();
+      const resUser = await $apiFetch("/api/account", {});
       this.user = resUser;
     },
   },

@@ -1,1 +1,1 @@
-export const useAccount = () => useBlogFetch("/api/account");
+export const useAccount = () => useApiFetch("/api/account");

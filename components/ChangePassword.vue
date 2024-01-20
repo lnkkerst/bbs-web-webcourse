@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { z } from "zod";
 
-const { $blogFetch } = useNuxtApp();
-
 const formEl = ref();
+const { $apiFetch } = useNuxtApp();
 
 const form = ref({
   currentPassword: "",
@@ -23,7 +22,7 @@ async function handleSubmit() {
 
   submitting.value = true;
   try {
-    await $blogFetch("/api/account/change-password", {
+    await $apiFetch("/api/account/change-password", {
       method: "POST",
       body: {
         currentPassword: form.value.currentPassword,

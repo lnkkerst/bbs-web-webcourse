@@ -1,7 +1,10 @@
 <script setup lang="ts">
-const userStore = useUserStore();
+import type { Comment } from "~/types/blogApi";
 
-const commentsFetch = await useBlogFetch("/api/comments", {
+const userStore = useUserStore();
+const { $apiFetch } = useNuxtApp();
+
+const commentsFetch = await useApiFetch<Comment[]>("/api/comments", {
   query: computed(
     () =>
       ({

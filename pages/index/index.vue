@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import type { Favorite } from "~/types/blogApi";
+
+definePageMeta({
+  name: "index",
+});
+
 const userStore = useUserStore();
+const { $apiFetch } = useNuxtApp();
 
 const currentNode = ref<number>(-1);
 
-const nodesFavFetch = await useBlogFetch("/api/favorites", {
+const nodesFavFetch = await useApiFetch<Favorite[]>("/api/favorites", {
   query: {
     "ownerId.equals": userStore.user?.id,
     "type.equals": "NODE",
@@ -15,7 +22,9 @@ const passNodes = computed<number[]>(() => {
     return [] as number[];
   }
   if (currentNode.value === -2 && nodesFavFetch.data.value) {
-    return nodesFavFetch.data.value.map(val => val.node?.id!);
+    return nodesFavFetch.data.value
+      .map(val => val.node?.id!)
+      .filter(val => val);
   }
   return [currentNode.value];
 });

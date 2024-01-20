@@ -1,32 +1,47 @@
 <script setup lang="ts">
 const userStore = useUserStore();
 
-const { data: nodesFavCount } = await useBlogFetch("/api/favorites/count", {
-  query: {
-    "type.equals": "NODE",
+const { data: nodesFavCount } = await useApiFetch<string>(
+  "/api/favorites/count",
+  {
+    query: {
+      "type.equals": "NODE",
+      "ownerId.equals": userStore.user?.id,
+    },
   },
-});
-const { data: usersFavCount } = await useBlogFetch("/api/favorites/count", {
-  query: {
-    "type.equals": "USER",
+);
+const { data: usersFavCount } = await useApiFetch<string>(
+  "/api/favorites/count",
+  {
+    query: {
+      "type.equals": "USER",
+      "ownerId.equals": userStore.user?.id,
+    },
   },
-});
-const { data: postsFavCount } = await useBlogFetch("/api/favorites/count", {
-  query: {
-    "type.equals": "POST",
+);
+const { data: postsFavCount } = await useApiFetch<string>(
+  "/api/favorites/count",
+  {
+    query: {
+      "type.equals": "POST",
+      "ownerId.equals": userStore.user?.id,
+    },
   },
-});
-const { data: postsCount } = await useBlogFetch("/api/posts/count", {
+);
+const { data: postsCount } = await useApiFetch<string>("/api/posts/count", {
   query: {
     "userId.equals": userStore.user?.id,
   },
 });
-const { data: commentsCount } = await useBlogFetch("/api/comments/count", {
-  query: {
-    "userId.equals": userStore.user?.id,
+const { data: commentsCount } = await useApiFetch<string>(
+  "/api/comments/count",
+  {
+    query: {
+      "userId.equals": userStore.user?.id,
+    },
   },
-});
-const { data: fansCount } = await useBlogFetch("/api/favorites/count", {
+);
+const { data: fansCount } = await useApiFetch<string>("/api/favorites/count", {
   query: {
     "type.equals": "USER",
     "userId.equals": userStore.user?.id,

@@ -1,30 +1,31 @@
 <script setup lang="ts">
 import { marked } from "marked";
+import type { Post } from "~/types/blogApi";
 
 const route = useRoute();
+const { $apiFetch } = useNuxtApp();
 
 const postId = computed(() => {
   return Number.parseInt(route.params.id as string);
 });
-const postFetch = await useBlogFetch("/api/posts/{id}", {
-  path: {
-    id: postId.value,
-  },
-});
+const postFetch = await useApiFetch<Post>(
+  () => `/api/posts/${postId.value}`,
+  {},
+);
 const postHtml = computed(() => {
   const { $dompurify } = useNuxtApp();
   const content = postFetch.data.value?.content ?? "";
   return $dompurify.sanitize(marked.parse(content) as string);
 });
 const user = computed(() => postFetch.data.value?.user);
-const commentCountFetch = await useBlogFetch("/api/comments/count", {
+const commentCountFetch = await useApiFetch<string>("/api/comments/count", {
   query: computed(() => ({
     "postId.equals": postFetch.data.value?.id ?? -1,
   })),
 });
-const favCountFetch = await useBlogFetch("/api/favorites/count", {
+const favCountFetch = await useApiFetch<string>("/api/favorites/count", {
   query: computed(() => ({
-    "type.equals": "NODE" as any,
+    "type.equals": "POST" as any,
     "postId.equals": postFetch.data.value?.id ?? -1,
   })),
 });

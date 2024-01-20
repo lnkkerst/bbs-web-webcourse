@@ -23,21 +23,20 @@ export default defineNuxtConfig({
     "nuxt-quasar-ui",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
-    "@formkit/auto-animate",
     "@hypernym/nuxt-anime",
   ],
   runtimeConfig: {
     public: {
-      blogApiBase: process.env["NUXT_BLOGAPI_BASE"],
+      blogApiBase: process.env["NUXT_PUBLIC_BLOG_API_BASE"],
+    },
+    openFetch: {
+      blog: {
+        baseURL: process.env["NUXT_OPEN_FETCH_BLOG_BASE_URL"],
+      },
     },
   },
   openFetch: {
     disablePlugin: true,
-    clients: {
-      blog: {
-        baseURL: process.env["NUXT_BLOGAPI_BASE"],
-      },
-    },
   },
   quasar: {
     iconSet: "mdi-v7",

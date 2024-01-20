@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import type { Favorite } from "~/types/blogApi";
+
 const props = defineProps<{
   postId: number;
 }>();
 
-const { $blogFetch } = useNuxtApp();
 const userStore = useUserStore();
+const { $apiFetch } = useNuxtApp();
 
-const favStatusFetch = await useBlogFetch("/api/favorites", {
+const favStatusFetch = await useFetch<Favorite[]>("/api/favorites", {
   query: computed(
     () =>
       ({
@@ -33,9 +35,8 @@ async function handleClick() {
   submitting.value = true;
   if (favorited.value) {
     try {
-      await $blogFetch("/api/favorites/{id}", {
+      await $apiFetch(`/api/favorites/${favorited.value.id!}`, {
         method: "DELETE",
-        path: { id: favorited.value.id! },
       });
 
       Notify.create({
@@ -53,7 +54,7 @@ async function handleClick() {
     }
   } else {
     try {
-      await $blogFetch("/api/favorites", {
+      await $apiFetch("/api/favorites", {
         method: "POST",
         body: {
           type: "POST",

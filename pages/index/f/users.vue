@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { Favorite } from "~/types/blogApi";
+
 const userStore = useUserStore();
-const userFavListFetch = await useBlogFetch("/api/favorites", {
+const userFavListFetch = await useApiFetch<Favorite[]>("/api/favorites", {
   query: {
     "type.equals": "USER",
     "ownerId.equals": userStore.user?.id,

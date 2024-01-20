@@ -2,7 +2,7 @@
 import { z } from "zod";
 
 const userStore = useUserStore();
-const { $blogFetch } = useNuxtApp();
+const { $apiFetch } = useNuxtApp();
 
 const loading = ref(true);
 const formEl = ref();
@@ -36,7 +36,7 @@ async function handleSubmit() {
   }
   submitting.value = true;
   try {
-    await $blogFetch("/api/account", {
+    await $apiFetch("/api/account", {
       method: "POST",
       body: {
         login: form.value.username,

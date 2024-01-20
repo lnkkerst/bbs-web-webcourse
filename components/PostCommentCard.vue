@@ -6,11 +6,12 @@ const props = defineProps<{ postId: number }>();
 
 const userStore = useUserStore();
 const router = useRouter();
+const { $apiFetch } = useNuxtApp();
 
 const newCommentEl = ref<HTMLElement>();
 const replyChipEl = ref<HTMLElement>();
 
-const commentsFetch = await useBlogFetch("/api/comments", {
+const commentsFetch = await useApiFetch<Comment[]>("/api/comments", {
   query: computed(
     () =>
       ({
@@ -44,10 +45,9 @@ async function handleSubmit() {
     return;
   }
 
-  const { $blogFetch } = useNuxtApp();
   submitting.value = true;
   try {
-    const _res = await $blogFetch("/api/comments", {
+    const _res = await $apiFetch("/api/comments", {
       method: "POST",
       body: {
         content: newCommentText.value,

@@ -3,9 +3,11 @@ import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 
 import { z } from "zod";
+import type { Node } from "~/types/blogApi";
 
 const router = useRouter();
 const userStore = useUserStore();
+const { $apiFetch } = useNuxtApp();
 if (!userStore.user) {
   Notify.create({
     type: "warning",
@@ -20,7 +22,7 @@ const titleInputEl = ref();
 const title = ref("");
 const content = ref("");
 const selectedNode = ref({ id: -1, name: "请选择" });
-const nodesFetch = await useBlogFetch("/api/nodes");
+const nodesFetch = await useApiFetch<Node[]>("/api/nodes");
 const submitting = ref(false);
 const routing = ref(false);
 
@@ -45,10 +47,9 @@ async function handleSubmit() {
   }
 
   submitting.value = true;
-  const { $blogFetch } = useNuxtApp();
   const userStore = useUserStore();
   try {
-    const res = await $blogFetch("/api/posts", {
+    const res = await $apiFetch("/api/posts", {
       method: "POST",
       body: {
         title: title.value,

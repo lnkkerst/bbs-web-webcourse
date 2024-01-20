@@ -5,7 +5,7 @@ const emit = defineEmits<{
   (e: "update:node", id?: number): void;
 }>();
 
-const nodesFetch = await useBlogFetch("/api/nodes");
+const nodesFetch = await useApiFetch<Node[]>("/api/nodes");
 const nodes = computed(() => {
   const res: Array<Node> = [
     { id: -1, name: "全部" },

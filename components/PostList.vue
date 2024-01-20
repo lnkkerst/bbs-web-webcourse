@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import type { Post } from "~/types/blogApi";
+
 const props = defineProps<{
   nodeId?: number[];
   userId?: number;
 }>();
-
-definePageMeta({
-  name: "index",
-});
 
 const page = ref(1);
 const size = ref(20);
@@ -15,7 +13,7 @@ const maxPages = computed(() => {
   return Math.floor((totalCount.value + size.value - 1) / size.value);
 });
 const searchText = useSearchText();
-const postsFetch = await useBlogFetch("/api/posts", {
+const postsFetch = await useApiFetch<Post[]>("/api/posts", {
   query: refDebounced(
     computed(() => ({
       "nodeId.in": props.nodeId,
@@ -56,7 +54,7 @@ const postsFetch = await useBlogFetch("/api/posts", {
           <q-item clickable>
             <q-item-section avatar class="items-center w-64px">
               <q-avatar size="44px">
-                <q-img :src="post.user.imageUrl || defaultAvatar" />
+                <q-img :src="post.user?.imageUrl || defaultAvatar" />
               </q-avatar>
             </q-item-section>
 
@@ -64,8 +62,8 @@ const postsFetch = await useBlogFetch("/api/posts", {
               <q-item-label>{{ post.title }}</q-item-label>
 
               <q-item-label caption class="">
-                <span>{{ `${post.user.firstName} 发布在` }}</span>
-                <q-chip :label="post.node.name" dense square></q-chip>
+                <span>{{ `${post.user?.firstName} 发布在` }}</span>
+                <q-chip :label="post.node?.name" dense square></q-chip>
               </q-item-label>
             </q-item-section>
 

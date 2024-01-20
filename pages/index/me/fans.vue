@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import type { Favorite } from "~/types/blogApi";
+
+const { $apiFetch } = useNuxtApp();
 const userStore = useUserStore();
-const userFavListFetch = await useBlogFetch("/api/favorites", {
+const userFavListFetch = await useApiFetch<Favorite[]>("/api/favorites", {
   query: {
     "type.equals": "USER",
     "userId.equals": userStore.user?.id,
@@ -12,7 +15,7 @@ const userFavListFetch = await useBlogFetch("/api/favorites", {
   <q-card>
     <UserDetailItem
       v-for="fav in userFavListFetch.data.value"
-      :user-id="fav.user?.id as number"
+      :user-id="fav.owner?.id as number"
       :key="fav.id"
     ></UserDetailItem>
 

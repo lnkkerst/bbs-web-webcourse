@@ -6,24 +6,26 @@ const props = defineProps<{
 }>();
 
 const userStore = useUserStore();
-
+const { $apiFetch } = useNuxtApp();
 const { blogApiBase } = useRuntimeConfig().public;
 
 const userFetch = await useFetch<User>(
   `${blogApiBase}/api/users/${props.userId}`,
   { cache: "no-cache" },
 );
-// const userFetch = await useBlogFetch(`/api/users/${props.userId}`, {});
-const followStatusFetch = useFetch<Favorite[]>(`${blogApiBase}/api/favorites`, {
-  query: computed(
-    () =>
-      ({
-        "type.equals": "USER",
-        "ownerId.equals": userStore.user?.id,
-        "userId.equals": userFetch.data.value?.id,
-      }) as any,
-  ),
-});
+const followStatusFetch = await useFetch<Favorite[]>(
+  `${blogApiBase}/api/favorites`,
+  {
+    query: computed(
+      () =>
+        ({
+          "type.equals": "USER",
+          "ownerId.equals": userStore.user?.id,
+          "userId.equals": userFetch.data.value?.id,
+        }) as any,
+    ),
+  },
+);
 const followed = computed(
   () => followStatusFetch.data.value && followStatusFetch.data.value.length > 0,
 );
@@ -36,13 +38,14 @@ async function handleFollow() {
   }
 
   following.value = true;
-  const { $blogFetch } = useNuxtApp();
   if (followed.value) {
     try {
-      await $blogFetch("/api/favorites/{id}", {
-        method: "DELETE",
-        path: { id: followStatusFetch.data.value?.[0].id as number },
-      });
+      await $apiFetch(
+        `/api/favorites/${followStatusFetch.data.value?.[0].id as number}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       Notify.create({
         type: "positive",
@@ -59,7 +62,7 @@ async function handleFollow() {
     }
   } else {
     try {
-      await $blogFetch("/api/favorites", {
+      await $apiFetch("/api/favorites", {
         method: "POST",
         body: {
           owner: {
