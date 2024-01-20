@@ -1,75 +1,79 @@
-# Nuxt 3 Minimal Starter
+# BBS Web
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+一个简单的博客系统前端，《Web应用程序开发》课设。
 
-## Setup
+## 开发
 
-Make sure to install the dependencies:
+确保安装 `pnpm`：
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npm install -g pnpm
+pnpm setup
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+or：
 
 ```bash
-# npm
-npm run dev
+corepack enable
+```
 
-# pnpm
+### 安装依赖
+
+```bash
+pnpm i
+```
+
+### 开发模式
+
+```bash
 pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
+### 构建
 
 ```bash
-# npm
-npm run build
-
-# pnpm
 pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+## 部署
+
+### 环境变量
+
+| 名称                        | 作用                                                 |
+| --------------------------- | ---------------------------------------------------- |
+| `NUXT_PUBLIC_BLOG_API_BASE` | 后端 API 的地址（叫 blogApi 纯粹是因为起错名了;-( ） |
+
+### 运行
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+node .output/server/index.mjs
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Docker
+
+构建 image：
+
+```bash
+docker buildx build -t bbs-web:latest .
+```
+
+运行：
+
+```bash
+docker run --name bbs-web -d \
+  --stopped=unless-stopped \
+  -e NUXT_PUBLIC_BLOG_API_BASE=xxx \
+  -p 80:80 \
+  bbs-web:latest
+```
+
+docker compose:
+
+```bash
+vim docker-compose.yml
+docker compose up -d
+```
+
+### Serverless
+
+- [x] Vercel: 直接选中部署就行

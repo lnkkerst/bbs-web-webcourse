@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  bbs-web:
+    build: .
+    environment:
+      - "NUXT_PUBLIC_BLOG_API_BASE:xxx"
+    ports:
+      - "80:80"
