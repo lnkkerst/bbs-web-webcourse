@@ -8,7 +8,7 @@ const props = defineProps<{
 const userStore = useUserStore();
 const { $apiFetch } = useNuxtApp();
 
-const favStatusFetch = await useFetch<Favorite[]>("/api/favorites", {
+const favStatusFetch = await useApiFetch<Favorite[]>("/api/favorites", {
   query: computed(
     () =>
       ({
